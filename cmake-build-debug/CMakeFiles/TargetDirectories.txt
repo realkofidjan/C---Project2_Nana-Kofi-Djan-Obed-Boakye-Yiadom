@@ -1,0 +1,3 @@
+/Users/xander/Documents/OneDrive - Ashesi University/ Academia/2nd Year Sem 2/Intermediate Computer Programming /C++ Individual Project/cmake-build-debug/CMakeFiles/C___Individual_Project.dir
+/Users/xander/Documents/OneDrive - Ashesi University/ Academia/2nd Year Sem 2/Intermediate Computer Programming /C++ Individual Project/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/xander/Documents/OneDrive - Ashesi University/ Academia/2nd Year Sem 2/Intermediate Computer Programming /C++ Individual Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
