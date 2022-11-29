@@ -1,5 +1,5 @@
 //
-// Created by Cyril K on 11/20/2022.
+// Created by Obed Boakye on 11/20/2022.
 //
 
 #ifndef C___INDIVIDUAL_PROJECT_AIRPORT_H
@@ -7,7 +7,7 @@
 
 #include <string>
 #include <vector>
-#include <unordered_map>
+#include <map>
 using namespace std;
 
 
@@ -16,8 +16,8 @@ private:
     string airportID, name, city, country, iataCode, icaoCode;
     double latitude, longitude;
 public:
-    static unordered_map<string, vector<Airport>> airports;
-    static unordered_map<string, Airport> codes;
+    static map<string, vector<Airport>> airports;
+    static map<string, Airport> codes;
     Airport(string id, string name, string city, string country, string iataCode, string icaoCode, double latitude, double longitude);
     static void readFile(string csvFile);
     static vector<Airport> getAirport(string source);
@@ -36,4 +36,4 @@ public:
 };
 
 
-#endif //C___INDIVIDUAL_PROJECT_AIRPORT_H
+#endif
