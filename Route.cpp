@@ -23,16 +23,15 @@ using namespace std;
  * @param destId id of the destination airport
  * @param stops number of stops
  */
-Route::Route(string airlineIata, string airlineId, string sourceIata,
-             string sourceId, string destIata, string destId,
-              string stops) {
-    this->airlineIata = airlineIata;
-    this->airlineId = airlineId;
-    this->sourceIata = sourceIata;
-    this->sourceId = sourceId;
-    this->destIata = destIata;
-    this->destId = destId;
-    this->stops = stops;
+Route::Route( string airlineCode, string airlineID,string sourceAirportCode, string sourceAirportID,
+             string destinationAirportCode, string destinationAirportID,  string stops){
+            this->airlineCode = airlineCode;
+            this->airlineID = airlineID;
+            this->sourceAirportCode = sourceAirportCode;
+            this->sourceAirportID = sourceAirportID;
+            this->destinationAirportCode = destinationAirportCode;
+            this->destinationAirportID = destinationAirportID;
+            this->stops = stops;
 }
 
 
@@ -44,8 +43,9 @@ Route::Route(string airlineIata, string airlineId, string sourceIata,
 void Route::getFlights(string csvFile) {
     ifstream fileStream;
 
-    try{
-        fileStream.open(csvFile);
+      if (!fileStream.is_open()) {
+        cout << "File not opened";
+    }else{
 
         string line, airlineIata, airlineId, sourceAirportIata, sourceAirportId, destAirportIata, destAirportId, codeshare, stops;
 
@@ -95,12 +95,7 @@ void Route::getFlights(string csvFile) {
         }
 
     }
-    catch (std::exception const& e){
-        cout << "There was an error: " << e.what() << endl;
-    }
-    fileStream.close();
 
-}
 
 
 /**
@@ -112,7 +107,9 @@ void Route::findRoute(std::string csvFile) {
     ifstream fileStream;
     vector<string> list;
 
-    try{
+       if (!airportFile.is_open()) {
+        cout << "File not opened";
+    } else{
         string line,city, country, destinationCity, destinationCountry;
 
         fileStream.open(csvFile);
@@ -125,9 +122,8 @@ void Route::findRoute(std::string csvFile) {
         }
 
     }
-    catch (std::exception const& e){
-        cout << "There was an error: " << e.what() << endl;
-    }
+
+
     fileStream.close();
     string sourceCity = list.at(0);
     string sourceCountry = list.at(1);
@@ -355,37 +351,35 @@ void Route::writeToFile(string start, string destination, vector<string> path, v
     ofstream fileStream;
     start[0] = tolower(start[0]);
     destination[0] = tolower(destination[0]);
-    try{
+    if (!airportFile.is_open()) {
+        cout << "File not opened";
+    } else {
         string filename = start + "-" + destination + "_output.txt";
         fileStream.open(filename);
 
-        int count  =  0;
+        int count = 0;
         int numStops = 0;
-        while (count < path.size()-1){
-            string key = path.at(count) + "," + path.at(count+1);
+        while (count < path.size() - 1) {
+            string key = path.at(count) + "," + path.at(count + 1);
             vector<Route> route = Route::flights[key];
-            string stops = route.at(0).getNumStops(); //Getting the number of stops for the first flight taken, corresponding to the first flight selected earlier
-            fileStream << count+1 << ". " << flightPath.at(count) + " from " + path.at(count) + " to " + path.at(count+1) + stops + " stops" << endl;
+            string stops = route.at(
+                    0).getNumStops();
+            fileStream << count + 1 << ". "
+                       << flightPath.at(count) + " from " + path.at(count) + " to " + path.at(count + 1) + stops +
+                          " stops" << endl;
             numStops += stoi(stops);
             count++;
 
         }
 
-        int numFlights = path.size()-1;
+        int numFlights = path.size() - 1;
         fileStream << "Total flights = " << numFlights << endl;
         fileStream << "Total additional stops = " << numStops << endl;
         fileStream << "Total distance: " << distance << "km" << endl;
-        fileStream << "Optimality criteria: distance";
 
 
     }
-    catch (std::exception const& e){
-        cout << "There was an error: " << e.what() << endl;
-    }
-    fileStream.close();
 
-
-}
 
 /**
  * This function computes the distance between two points with given latitude and longitude
@@ -393,33 +387,12 @@ void Route::writeToFile(string start, string destination, vector<string> path, v
  * @param destination The destination airport
  * @return The distance between the two airports
  */
-double Route::haversine(Airport start, Airport destination) {
-    double startLatitude, destinationLatitude, startLongitude, destinationLongitude;
 
-    startLatitude = start.getLatitude();
-    startLongitude = start.getLongitude();
-    destinationLatitude = destination.getLatitude();
-    destinationLongitude = destination.getLongitude();
+    string Route::getNumStops() {
+        return this->stops;
+    }
 
-    double latitudeDistance = (destinationLatitude - startLatitude) * M_PI / 180.0;
-    double longitudeDistance = (destinationLongitude - startLongitude) * M_PI/ 180.0;
-
-    startLatitude = (startLatitude) * M_PI / 180.0;
-    destinationLatitude = (destinationLatitude) * M_PI / 180.0;
-
-    double temp = pow(sin(latitudeDistance / 2), 2) + pow(sin(longitudeDistance / 2), 2) * cos(startLatitude) * cos(destinationLatitude);
-
-    double rad = 6371;
-    double x = 2 * asin(sqrt(temp));
-    double result = rad * x;
-
-    return result;
 
 }
-
-string Route::getNumStops() {
-    return this->stops;
 }
-
-
 
