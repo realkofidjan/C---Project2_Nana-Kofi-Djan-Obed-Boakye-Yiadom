@@ -35,7 +35,7 @@ airports::airports(string id, string name, string city, string country, string i
 
 void airports::reader() {
     ifstream file;
-    file.open("/Users/xander/Downloads/C++ Individual Project 2/airports.csv");
+    file.open("airports.csv");
     string temp, ID, name, city, country, iata;
 
 

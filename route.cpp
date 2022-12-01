@@ -33,7 +33,7 @@ void route::config() {
     ifstream file;
 
 
-    file.open("/Users/xander/Downloads/C++ Individual Project 2/routes.csv");
+    file.open("routes.csv");
 
     string temp, airlineIATA, airlineID, sourceAirportIATA, sourceAirportID, destAirportIATA, destAirportID;
 
@@ -55,8 +55,8 @@ void route::config() {
             flightroute.insert({sourceAirportIATA,list});
         }
         else{
-            route myroute = route(airlineIATA,airlineID,sourceAirportIATA,sourceAirportID,destAirportIATA,destAirportID);
             vector<route> list;
+            route myroute = route(airlineIATA,airlineID,sourceAirportIATA,sourceAirportID,destAirportIATA,destAirportID);
             list.emplace_back(myroute);
             flightroute.insert({sourceAirportIATA,list});
         }
@@ -91,7 +91,7 @@ vector<string> route::bfs(airports x, airports y) {
 
                 route child = flightroute[val].at(i);
 
-                if (!containsDeque(frontier,child.destIata) and !containsSet(explored,child.destIata)){
+                if (!containsSet(explored,child.destIata) and !containsDeque(frontier,child.destIata)){
 
 
 
@@ -181,7 +181,7 @@ vector<string> route::reconstruct(string iata) {
 void route::config2() {
     ifstream file;
     string temp, airlineIATA, airlineID, sourceAirportIATA, sourceAirportID, destAirportIATA, destAirportID;
-    file.open("/Users/xander/Downloads/C++ Individual Project 2/routes.csv");
+    file.open("routes.csv");
     while(getline(file, temp)) {
         stringstream filestream(temp);
         getline(filestream, airlineIATA, ',');
