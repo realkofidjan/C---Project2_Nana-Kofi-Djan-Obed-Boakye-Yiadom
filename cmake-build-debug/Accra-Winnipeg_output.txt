@@ -1,5 +1,0 @@
-AA from ACC to LHR 0 stops
-AA from LHR to DEN 0 stops
-AC from DEN to YWG 0 stops
-Total flights = 3
-Total additional stops = 0
