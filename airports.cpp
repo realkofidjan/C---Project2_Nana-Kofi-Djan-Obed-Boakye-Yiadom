@@ -53,18 +53,18 @@ void airports::reader() {
 
         string key = city + ", " + country;
 
-        if (airports::portMap.find(key) != airports::portMap.end()) {
+        if (portMap.find(key) != portMap.end()) {
             airports p = airports(ID, name, city, country, iata);
-            vector<airports> list = airports::portMap.at(key);
+            vector<airports> list = portMap.at(key);
             list.emplace_back(p);
-            airports::portMap.erase(key);
-            airports::portMap.insert({key,list});
+            portMap.erase(key);
+            portMap.insert({key,list});
         }
         else{
             airports p = airports(ID, name, city, country, iata);
             vector<airports> list;
             list.emplace_back(p);
-            airports::portMap.insert({key,list});
+            portMap.insert({key,list});
         }
 
     }
