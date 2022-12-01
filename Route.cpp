@@ -1,11 +1,20 @@
-
+// This file represents a route file which computes the routes from one airport/airline location to another.
 #include "route.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
 using namespace std;
 
-
+/**
+ *This is a route constructor for the route class
+ *
+ * @param airlineIata the airline iata code
+ * @param airlineId the airline id
+ * @param sourceIata the iata code of the starting airport location
+ * @param sourceId the id of the starting airport location
+ * @param destIata the iata code of the destination airport location
+ * @param destId the destination id of the destination airport location
+ * */
 
 route::route(string airlineIata, string airlineId, string sourceIata, string sourceId, string destIata, string destId) {
     this->airlineIata = airlineIata;
@@ -15,6 +24,10 @@ route::route(string airlineIata, string airlineId, string sourceIata, string sou
     this->destIata = destIata;
     this->destId = destId;
 }
+/**
+ *   A function to read the airport file and store each airport in the file created in a map
+ *
+ **/
 
 void route::config() {
     ifstream file;
@@ -52,6 +65,11 @@ void route::config() {
     file.close();
 
 }
+
+/**
+ *  this function is an implementation of the breadth first search algorithm to find the path
+ between airport locations
+ * */
 
 
 vector<string> route::bfs(airports x, airports y) {
@@ -99,6 +117,12 @@ vector<string> route::bfs(airports x, airports y) {
 
 }
 
+/**
+ * This functions checks whether it can find a value in a deque
+ * @param deques the deque
+ * @param x the value being checked
+ * @return whether it has found a value in the deque
+ */
 
 bool route::containsDeque(deque<string> deques, string x) {
     deque<string>::iterator itr;
@@ -111,6 +135,13 @@ bool route::containsDeque(deque<string> deques, string x) {
     }
 
 }
+
+/**
+ * This function checks whether a value is contained in a set
+ * @param set The set
+ * @param x The value being checked
+ * @return whether the set contains the value or not
+ */
 
 bool route::containsSet(set<string> set, string x) {
     auto pos = set.find(x);
@@ -142,7 +173,10 @@ vector<string> route::reconstruct(string iata) {
     return list;
 }
 
-
+/**
+ * This method reads the route file and creates a hashmap of all airports and their corresponding start and end destinations
+ * The key is the source iata and destination iata, the value is the airports
+ * */
 
 void route::config2() {
     ifstream file;
@@ -177,11 +211,19 @@ void route::config2() {
 }
 
 
+/**
+ * This method generates the path and writes the outcome of the path to an output file called the Source - Destination
+ * of the path being found
+ * @param file The input file containing the start and destination location of the airport, for which the route is to be found
+ * */
+
+
 void route::getPath(string file) {
     ifstream fileStream;
     vector<string> list;
     string temp, city, country;
 
+    // gets the start city, country and destination city and country from the input file
     fileStream.open(file);
     while (getline(fileStream,temp)){
         stringstream filestream(temp);
@@ -234,7 +276,14 @@ void route::getPath(string file) {
 
 }
 
-
+/**
+ * This function is creates an output file of the path found from the start location to the end aiport location
+ * @param start The start location of the airport
+ * @param destination The destination or end location of the airport
+ * @param flights
+ * @param pathFound
+ *
+ * */
 void route::write(string start, string destination, vector<string> flights, vector<string> pathFound) {
     ofstream file;
 

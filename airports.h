@@ -1,6 +1,7 @@
 //
-// Created by Obed Boakye-Yiadom & Nana Kofi Djan on 30/11/2022.
+// Created by Obed Boakye-Yiadom & Nana Kofi Djanon 30/11/2022.
 //
+//This file represents a header file to instantiate and declare an Airport class
 
 #ifndef FINAL_AIRPORTS_H
 #define FINAL_AIRPORTS_H
