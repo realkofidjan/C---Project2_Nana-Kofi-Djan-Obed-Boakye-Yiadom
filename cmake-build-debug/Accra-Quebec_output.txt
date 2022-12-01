@@ -1,0 +1,5 @@
+2J from ACC to OUA 0 stops
+AF from OUA to CDG 0 stops
+TS from CDG to YQB 0 stops
+Total flights = 3
+Total additional stops = 0
