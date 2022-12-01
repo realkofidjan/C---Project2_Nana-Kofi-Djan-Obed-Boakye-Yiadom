@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.23)
-project(C___Individual_Project)
+project(final)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(C___Individual_Project main.cpp Airport.cpp Airport.h Route.cpp Route.h)
+add_executable(final main.cpp airports.cpp airports.h route.cpp route.h)

@@ -1,50 +1,36 @@
-//
-// Created by Obed Boakye on 11/25/2022.
-//
 
-#ifndef C___INDIVIDUAL_PROJECT_ROUTE_H
-#define C___INDIVIDUAL_PROJECT_ROUTE_H
+
+#ifndef FINAL_ROUTE_H
+#define FINAL_ROUTE_H
 
 #include <string>
 #include <map>
-#include <deque>
 #include <queue>
 #include <set>
-#include "Airport.h"
+#include "airports.h"
 using namespace std;
 
-class Route {
-private:
-    string airlineIata, airlineId, sourceIata, sourceId, destIata, destId, codeshare, equipment, stops;
-
+class route {
 public:
-    static map<string,vector<Route>> routes;
-    static map<string,vector<Route>> flights;
-    static map<string,string> parents;
+    string airlineIata, airlineId, sourceIata, sourceId, destIata, destId;
+    static map<string,vector<route>> codes;
+    static map<string,vector<route>> flightroute;
+    static map<string,string> path;
 
-    Route(string airlineIata,
-          string airlineId,
-          string sourceIata,
-          string sourceId,
-          string destIata,
-          string destId,
-          string stops);
-    string getAirlineIata();
-    string getAirlineId();
-    string getSourceIata();
-    string getSourceId();
-    string getdestIata();
-    string getdestId();
-    string getNumStops();
-    static bool contains(deque<string> q, string value);
-    static bool set_contains(set<string> s, string value);
-    static vector<string> solutionPath(string destinationIata);
-    static void getFlights(string csvFile);
-    static void findRoute(string csvFile);
-    static vector<string> search(Airport start, Airport destination);
-    static double haversine(Airport start, Airport destination);
-    static void writeToFile(string start, string destination, vector<string> path, vector<string> flightPath, double distance);
+    route(string airlineIata,string airlineId,string sourceIata,string sourceId,string destIata,string destId);
+    static void getPath(string file);
+    static vector<string> bfs(airports x, airports y);
+
+    static vector<string> reconstruct(string destinationIata);
+    static bool containsDeque(deque<string> deque, string x);
+    static void write(string start, string destination, vector<string> flights, vector<string> pathFound);
+    static bool containsSet(set<string> set, string x);
+
+    static void config();
+    static void config2();
+
 
 };
+
 
 #endif

@@ -1,19 +1,15 @@
+#include "airports.h"
+#include "route.h"
 #include <iostream>
-#include "Airport.h"
-#include <iostream>
-#include "Route.h"
-#include <cmath>
 using namespace std;
 
-map<string, vector<Airport>> Airport::airports = *new map<string, vector<Airport>>;
-map<string, vector<Route>> Route::routes = *new map<string, vector<Route>>;
-map<string, vector<Route>> Route::flights = *new map<string, vector<Route>>;
-map<string, string> Route::parents = *new map<string, string>;
-map<string, Airport> Airport::codes = *new map<string, Airport>;
 
+map<string, vector<airports>> airports::portMap = *new map<string, vector<airports>>;
+map<string,vector<route>> route::codes = *new map<string, vector<route>>;
+map<string,vector<route>> route::flightroute = *new map<string,vector<route>>;
+map<string,string> route::path = *new map<string,string>;
 
 int main() {
-    Route::findRoute("test.txt");
+    route::getPath("f.txt");
 
 }
-

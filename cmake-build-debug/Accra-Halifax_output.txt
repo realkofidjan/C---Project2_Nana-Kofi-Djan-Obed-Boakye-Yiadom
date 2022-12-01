@@ -1,0 +1,4 @@
+AA from ACC to LHR 0 stops
+AC from LHR to YHZ 0 stops
+Total flights = 2
+Total additional stops = 0
